@@ -19,10 +19,15 @@ var splitLetter = wordBank[randomNumber].split("");
 function lineFix(){
     var line1 = "_ ";
     var countLine = " ";
+    var line2 = [];
+    
+    //trying to add an array for the _ so that each _ has a location which can then be
+    //filled with the corresponding letter.  In a for loop, they should have the same index.
     for(i=0; i<splitLetter.length; i++){
         countLine = line1 + countLine;
+        // line2[i]= " _ ";
     }
-    console.log(line1);
+    console.log(countLine);
     document.getElementById("demo").innerHTML = countLine;
 }
 
