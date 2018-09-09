@@ -8,6 +8,7 @@ var countLine = [];
 var points = 0;
 var wordCombine;
 var wantToPlay = true;
+var userGuess; 
 
 
 //creates a random number that is multipled by the length of the wordBank
@@ -47,9 +48,29 @@ function wordJoinFunk(){
 
 };
 
+function wrongWordBank(){
+    wrongGuess = userGuess;
+    wrongGuess = wrongGuess + " " + wrongGuess;
+    document.getElementById("demo2").innerHTML = wrongGuess;
+
+};
+
+function scoreKeeper(){
+    
+    points++;
+    console.log(points);
+    document.getElementById("demo3").innerHTML = points;    
+
+};
+
 //Checking what key is pressed.  Will modify to work for the game
 //Maybe try and event listener for multiple events
-document.onkeyup = function(event) {
+
+document.addEventListener("keyup", GuessWordFunk);
+
+function GuessWordFunk(){
+
+// document.onkeyup = function(event) {
 
 
 
@@ -65,12 +86,10 @@ document.onkeyup = function(event) {
             console.log(countLine[i]);
             console.log(splitLetter[i]);
         }
-        // else if (userGuess != splitLetter[i]){
-        //     wrongGuess[i] = userGuess;
+        else if (userGuess != splitLetter[i]){
+            wrongWordBank();    
 
-            
-
-        // }
+        }
 
         // var x = document.getElementById("demo");
         // x.innerHTML = countLine.join(" ");
@@ -89,13 +108,7 @@ document.onkeyup = function(event) {
 
 };
 
-function scoreKeeper(){
-    
-    points++;
-    console.log(points);
-    document.getElementById("demo3").innerHTML = points;    
 
-};
 
 // lineFix();
 
