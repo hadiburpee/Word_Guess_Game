@@ -1,7 +1,7 @@
 //Word Guess Game Javascript File
 
 
-//declare and initialize wordBank array
+//declare/initialize global variables
 var wordBank = ["space", "earth", "sun", "galaxy", "saturn", "pillarsofcreation", "constellations"];
 var wordSplit = [];
 var countLine = [];
@@ -22,45 +22,39 @@ var splitLetter = wordBank[randomNumber].split("");
 
 //Changes the underlines for the letters to the length of the word
 
+//Changes the underline _ _ _ to the length of the word
 function lineFix(){
     var line1 = "_ ";
-    // countLine = " ";
-    
-    //trying to add an array for the _ so that each _ has a location which can then be
-    //filled with the corresponding letter.  In a for loop, they should have the same index.
+
     for(i=0; i<splitLetter.length; i++){
         countLine[i] = line1;
         wordSplit[i]=splitLetter[i];
         console.log(wordSplit);
     }
-    console.log(countLine);
-    console.log(wordSplit);
+    // console.log(countLine); Testing Purposes Only
+    // console.log(wordSplit);
     var x = document.getElementById("demo");
-    x.innerHTML = countLine.join(" ");
-    
+    x.innerHTML = countLine.join(" ");    
 };
 
 //Joins the correctly guessed letters back together to match back with the wordbank in later code
 function wordJoinFunk(){
-    console.log(countLine);
     wordCombine = countLine.join("");
-    console.log(wordCombine);
-
 };
 
-function wrongWordBank(){
-    wrongGuess = userGuess;
-    wrongGuess = wrongGuess + " " + wrongGuess;
-    document.getElementById("demo2").innerHTML = wrongGuess;
-
-};
-
-function scoreKeeper(){
+//store wrong guesses in a bank and display in html
+function wrongWordBank(){  
+    var node = document.createElement("IL");
+    var textnode = document.createTextNode(userGuess);
+    node.appendChild(textnode);
+    document.getElementById("demo2").appendChild(node);  
     
-    points++;
-    console.log(points);
-    document.getElementById("demo3").innerHTML = points;    
+};
 
+//Counts points when the conditions in the function GuessWorkFunk are met.
+function scoreKeeper(){
+    points++;
+    document.getElementById("demo3").innerHTML = points;    
 };
 
 //Checking what key is pressed.  Will modify to work for the game
@@ -71,41 +65,38 @@ document.addEventListener("keyup", GuessWordFunk);
 function GuessWordFunk(){
 
 // document.onkeyup = function(event) {
-
-
-
-    var userGuess = event.key;
-    var wrongGuess = [];
+    userGuess = event.key;
     console.log("A key was pressed" + " - " + userGuess + " - ");
 
     for(i=0; i<splitLetter.length; i++){
 
+        //conditional that puts a correct letter guess into the correct index of array countLine.
         if (userGuess === splitLetter[i]){
-
             countLine[i] = userGuess;
-            console.log(countLine[i]);
-            console.log(splitLetter[i]);
+            // console.log(countLine[i]);
+            // console.log(splitLetter[i]);
         }
-        else if (userGuess != splitLetter[i]){
-            wrongWordBank();    
-
-        }
-
-        // var x = document.getElementById("demo");
-        // x.innerHTML = countLine.join(" ");
+  
         document.getElementById("demo").innerHTML = countLine.join(" ");
-        console.log(countLine);
+        // console.log(countLine);
 
         if(wordCombine != wordBank[randomNumber]){
             wordJoinFunk();
         }
         
-        if(wordCombine == wordBank[randomNumber]){
-            scoreKeeper();
-        }
-
     }
 
+    // var x = splitLetter.indexOf(userGuess);
+    if(splitLetter.indexOf(userGuess) == -1){
+        wrongWordBank();
+        console.log("Wrong " + userGuess);
+    }
+    
+
+    //run scorekeeper outside of for loop so score doesn't get added multiple times    
+    if(wordCombine == wordBank[randomNumber]){
+            scoreKeeper();
+        }
 };
 
 
