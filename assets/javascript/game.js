@@ -20,7 +20,6 @@ var splitLetter = wordBank[randomNumber].split("");
 
     console.log(splitLetter);
 
-//Changes the underlines for the letters to the length of the word
 
 //Changes the underline _ _ _ to the length of the word
 function lineFix(){
@@ -45,7 +44,7 @@ function wordJoinFunk(){
 //store wrong guesses in a bank and display in html
 function wrongWordBank(){  
     var node = document.createElement("IL");
-    var textnode = document.createTextNode(userGuess);
+    var textnode = document.createTextNode(userGuess + " ");
     node.appendChild(textnode);
     document.getElementById("demo2").appendChild(node);  
     
@@ -60,10 +59,9 @@ function scoreKeeper(){
 //Checking what key is pressed.  Will modify to work for the game
 //Maybe try and event listener for multiple events
 
-document.addEventListener("keyup", GuessWordFunk);
+
 
 function GuessWordFunk(){
-
 // document.onkeyup = function(event) {
     userGuess = event.key;
     console.log("A key was pressed" + " - " + userGuess + " - ");
@@ -99,10 +97,7 @@ function GuessWordFunk(){
         }
 };
 
-
-
-// lineFix();
-
+document.addEventListener("keyup", GuessWordFunk);
 lineFix();
 
 
