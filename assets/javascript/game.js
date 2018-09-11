@@ -30,6 +30,7 @@ function splitRst(){
     wordSplit = [];
     countLine = [];
     console.log(splitLetter);
+    document.getElementById("demo2").innerHTML = " ";
 };
 
 
