@@ -1,7 +1,7 @@
 //Word Guess Game Javascript File
 
 
-//declare/initialize global variables
+//------------GLOBAL VARIABLES------------
 var wordBank = ["space", "earth", "sun", "galaxy", "saturn", "pillarsofcreation", "constellations"];
 var wordSplit = [];
 var countLine = [];
@@ -13,21 +13,11 @@ var randomNumber;
 var splitLetter = [];
 
 
-//creates a random number that is multipled by the length of the wordBank
-// var randomNumber = Math.floor(Math.random() * wordBank.length);
-//     console.log(randomNumber);
+//------------FUNCTIONS------------
 
 function wordChooser(){
     randomNumber = Math.floor(Math.random() * wordBank.length);
 };
-
-
-
-// //splits the word into letters
-// var splitLetter = wordBank[randomNumber].split("");
-
-//     console.log(splitLetter);
-
 
 
 function splitWord(){
@@ -41,7 +31,6 @@ function splitRst(){
     countLine = [];
     console.log(splitLetter);
 };
-
 
 
 //Changes the underline _ _ _ to the length of the word
@@ -114,36 +103,30 @@ function GuessWordFunk(){
     }
     
 
-    //run scorekeeper outside of for loop so score doesn't get added multiple times    
+    //keeps score if correct and then resets the game    
     if(wordCombine == wordBank[randomNumber]){
             scoreKeeper();
             splitRst();
             wordChooser();
             splitWord();
-
-            //fixes the lines to the new word length
             lineFix();
         }
 };
 
 
+
+//------------CALLS------------
+
 wordChooser();
 splitWord();
 lineFix();
-
 document.addEventListener("keyup", GuessWordFunk);
-// lineFix();
 
 
 
 
-// Testing get element by Id function
-// function myFunction(){
-//     document.getElementById("demo").innerHTML = "Changed";
 
-// }
 
-//CALLS
 
 
 
