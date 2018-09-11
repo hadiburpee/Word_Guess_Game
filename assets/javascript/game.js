@@ -9,16 +9,39 @@ var points = 0;
 var wordCombine;
 var wantToPlay = true;
 var userGuess; 
+var randomNumber;
+var splitLetter = [];
 
 
 //creates a random number that is multipled by the length of the wordBank
-var randomNumber = Math.floor(Math.random() * wordBank.length);
-    console.log(randomNumber);
+// var randomNumber = Math.floor(Math.random() * wordBank.length);
+//     console.log(randomNumber);
 
-//splits the word into letters
-var splitLetter = wordBank[randomNumber].split("");
+function wordChooser(){
+    randomNumber = Math.floor(Math.random() * wordBank.length);
+};
 
+
+
+// //splits the word into letters
+// var splitLetter = wordBank[randomNumber].split("");
+
+//     console.log(splitLetter);
+
+
+
+function splitWord(){
+    splitLetter = wordBank[randomNumber].split("");
     console.log(splitLetter);
+};
+
+function splitRst(){
+    splitLetter = [];
+    wordSplit = [];
+    countLine = [];
+    console.log(splitLetter);
+};
+
 
 
 //Changes the underline _ _ _ to the length of the word
@@ -94,11 +117,22 @@ function GuessWordFunk(){
     //run scorekeeper outside of for loop so score doesn't get added multiple times    
     if(wordCombine == wordBank[randomNumber]){
             scoreKeeper();
+            splitRst();
+            wordChooser();
+            splitWord();
+
+            //fixes the lines to the new word length
+            lineFix();
         }
 };
 
-document.addEventListener("keyup", GuessWordFunk);
+
+wordChooser();
+splitWord();
 lineFix();
+
+document.addEventListener("keyup", GuessWordFunk);
+// lineFix();
 
 
 
