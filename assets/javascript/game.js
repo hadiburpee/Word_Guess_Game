@@ -11,12 +11,13 @@ var wantToPlay = true;
 var userGuess; 
 var randomNumber;
 var splitLetter = [];
+var guessL = 15;
 
 
 //------------FUNCTIONS------------
 
 function wordChooser(){
-    randomNumber = Math.floor(Math.random() * wordBank.length);
+    randomNumber = Math.floor(Math.random() * wordBank.length+1);
 };
 
 
@@ -25,13 +26,28 @@ function splitWord(){
     console.log(splitLetter);
 };
 
+
+//function to reset necessary attributes for a new game.
 function splitRst(){
+    
     splitLetter = [];
     wordSplit = [];
     countLine = [];
+    guessL = 15;
     console.log(splitLetter);
     document.getElementById("demo2").innerHTML = " ";
+    document.getElementById("guessRem").innerHTML = ("15");
 };
+
+
+//guesses left counter function.
+function guessLeft(){
+
+    document.getElementById("guessRem").innerHTML = guessL;
+    guessL--;
+
+};
+
 
 
 //Changes the underline _ _ _ to the length of the word
@@ -43,8 +59,7 @@ function lineFix(){
         wordSplit[i]=splitLetter[i];
         console.log(wordSplit);
     }
-    // console.log(countLine); Testing Purposes Only
-    // console.log(wordSplit);
+
     var x = document.getElementById("demo");
     x.innerHTML = countLine.join(" ");    
 };
@@ -75,7 +90,7 @@ function scoreKeeper(){
 
 
 function GuessWordFunk(){
-// document.onkeyup = function(event) {
+
     userGuess = event.key;
     console.log("A key was pressed" + " - " + userGuess + " - ");
 
@@ -84,12 +99,9 @@ function GuessWordFunk(){
         //conditional that puts a correct letter guess into the correct index of array countLine.
         if (userGuess === splitLetter[i]){
             countLine[i] = userGuess;
-            // console.log(countLine[i]);
-            // console.log(splitLetter[i]);
         }
   
         document.getElementById("demo").innerHTML = countLine.join(" ");
-        // console.log(countLine);
 
         if(wordCombine != wordBank[randomNumber]){
             wordJoinFunk();
@@ -100,9 +112,17 @@ function GuessWordFunk(){
     // var x = splitLetter.indexOf(userGuess);
     if(splitLetter.indexOf(userGuess) == -1){
         wrongWordBank();
+        guessLeft();
+        
         console.log("Wrong " + userGuess);
     }
-    
+
+    if(guessL == -1){
+        splitRst();
+        wordChooser();
+        splitWord();
+        lineFix();
+    }
 
     //keeps score if correct and then resets the game    
     if(wordCombine == wordBank[randomNumber]){
@@ -121,6 +141,7 @@ function GuessWordFunk(){
 wordChooser();
 splitWord();
 lineFix();
+guessLeft();
 document.addEventListener("keyup", GuessWordFunk);
 
 
