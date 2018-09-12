@@ -2,7 +2,7 @@
 
 
 //------------GLOBAL VARIABLES------------
-var wordBank = ["space", "earth", "sun", "galaxy", "saturn", "pillarsofcreation", "constellations"];
+var wordBank = ["earth", "sun", "galaxy", "pluto", "pillarsofcreation", "constellations"];
 var wordSplit = [];
 var countLine = [];
 var points = 0;
@@ -64,6 +64,43 @@ function lineFix(){
     x.innerHTML = countLine.join(" ");    
 };
 
+//changes pictures based on random number
+//["earth", "sun", "galaxy", "pluto", "pillarsofcreation", "constellations"];
+function pictureChanger(){
+    if(randomNumber == 0){
+        document.getElementById("pictures").innerHTML = "";
+        document.getElementById("pictures").src="assets/images/Earth.jpg";
+    }
+
+    if(randomNumber == 1){
+        document.getElementById("pictures").innerHTML = "";
+        document.getElementById("pictures").src="assets/images/Sun.jpg";  
+    }
+
+    if(randomNumber == 2){
+        document.getElementById("pictures").innerHTML = "";
+        document.getElementById("pictures").src="assets/images/galaxy.jpg";
+    }
+
+    if(randomNumber == 3){
+        document.getElementById("pictures").innerHTML = "";
+        document.getElementById("pictures").src="assets/images/Pluto.jpg";
+    }
+
+    if(randomNumber == 4){
+        document.getElementById("pictures").innerHTML = "";
+        document.getElementById("pictures").src="assets/images/pillarsofcreation.jpg";
+    }
+
+    if(randomNumber == 5){
+        document.getElementById("pictures").innerHTML = "";
+        document.getElementById("pictures").src="assets/images/constellations.jpg";
+    }
+
+
+
+};
+
 //Joins the correctly guessed letters back together to match back with the wordbank in later code
 function wordJoinFunk(){
     wordCombine = countLine.join("");
@@ -122,6 +159,7 @@ function GuessWordFunk(){
         wordChooser();
         splitWord();
         lineFix();
+        pictureChanger();
     }
 
     //keeps score if correct and then resets the game    
@@ -131,6 +169,8 @@ function GuessWordFunk(){
             wordChooser();
             splitWord();
             lineFix();
+            pictureChanger();
+
         }
 };
 
@@ -142,6 +182,7 @@ wordChooser();
 splitWord();
 lineFix();
 guessLeft();
+pictureChanger();
 document.addEventListener("keyup", GuessWordFunk);
 
 
