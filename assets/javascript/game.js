@@ -14,14 +14,18 @@ var splitLetter = [];
 var guessL = 15;
 
 
+
 //------------FUNCTIONS------------
 
+//I had wordBank.lenght + 1 but it would never pull the first word 
+//took out the +1 and it still pulls all the words
 function wordChooser(){
-    randomNumber = Math.floor(Math.random() * wordBank.length+1);
+    randomNumber = Math.floor(Math.random() * wordBank.length);
 };
 
 
 function splitWord(){
+    console.log(randomNumber);
     splitLetter = wordBank[randomNumber].split("");
     console.log(splitLetter);
 };
@@ -63,6 +67,8 @@ function lineFix(){
     var x = document.getElementById("demo");
     x.innerHTML = countLine.join(" ");    
 };
+
+
 
 //changes pictures based on random number
 //["earth", "sun", "galaxy", "pluto", "pillarsofcreation", "constellations"];
@@ -177,6 +183,7 @@ function GuessWordFunk(){
 
 
 //------------CALLS------------
+//NEED TO ADD PRESS ANY KEY TO START
 
 wordChooser();
 splitWord();
@@ -184,6 +191,9 @@ lineFix();
 guessLeft();
 pictureChanger();
 document.addEventListener("keyup", GuessWordFunk);
+
+
+
 
 
 
